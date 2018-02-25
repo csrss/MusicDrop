@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>5fd0e509-b6ae-4f29-bd2a-4d2cc10f3aa0</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="HttpGetRequestDispatcher.cpp" />
+    <ClCompile Include="HttpPostRequestDispatcher.cpp" />
+    <ClCompile Include="HttpServer.cpp" />
+    <ClCompile Include="HttpGlobals.cpp" />
+    <ClCompile Include="SongTransferResult.cpp" />
+    <ClCompile Include="HttpFileTransfer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="HttpGetRequestDispatcher.h" />
+    <ClInclude Include="HttpPostRequestDispatcher.h" />
+    <ClInclude Include="HttpRequestDispatcher.h" />
+    <ClInclude Include="HttpServer.h" />
+    <ClInclude Include="IHttpFileDropEvent.h" />
+    <ClInclude Include="AudioItem.h" />
+    <ClInclude Include="Iface.h" />
+    <ClInclude Include="HttpGlobals.h" />
+    <ClInclude Include="SongTransferResult.h" />
+    <ClInclude Include="HttpHeaderFields.h" />
+    <ClInclude Include="HttpFileTransfer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,122 @@
+﻿body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+fieldset, img {
+	border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+caption, th {
+	text-align: left;
+}
+/* h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+} */
+/* * * * * * * * * * * * * * * * * * * * *
+* General
+* * * * * * * * * * * * * * * * * * * * */
+body {
+	/* background: url('body.jpg') repeat; */
+	font: normal 14px Segoe UI;
+	color: #ddd;
+	text-shadow: #262729 0 -1px 0;
+	-webkit-font-smoothing: antialiased;
+	padding: 0px 150px 50px 150px;
+}
+input {
+	color: #ddd;
+	font: normal 12px/1.3 Segoe UI;
+	font-size: 15px;
+	padding: 5px 5px;
+	border-radius: 5px;
+	border: solid 1px #666;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+input:focus {
+	/*border: none;*/
+	outline: none;
+	background-color: rgba(0, 0, 0, 0.1);
+	/*border-top: solid 1px #aaa;
+	border-right: solid 1px #e6e6e6;
+	border-bottom: solid 1px #e6e6e6;
+	border-left: solid 1px #aaa;*/
+}
+.btn {
+	color: #ddd;
+	/*margin-right: 5px;*/
+	padding: 5px 5px;
+	text-align:center;
+	border-radius: 5px;
+	border: solid 1px #666;
+	display: block;
+	float: left;
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	cursor: hand;
+}
+.btn:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+	color: #fafafa;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+	/*margin-bottom: 10px;*/
+}
+th {
+	/*background-color: rgba(0, 0, 0, 0.1);*/
+	/*border: solid 1px rgba(255, 255, 255, 0.1);*/
+	padding: 10px 10px;
+	text-align: left;
+	font-weight: bold;
+	color: #dddddd;
+}
+td {
+	padding: 10px 10px;
+	/*border: solid 1px rgba(255, 255, 255, 0.1);*/
+}
+
+/* * * * * * * * * * * * * * * * * * * * *
+* Start page
+* * * * * * * * * * * * * * * * * * * * */
+
+#example-list {
+	margin-bottom: 30px;
+}
+#example-list .list {
+	clear: both;
+}
+#example-list li {
+	font: normal 15px Segoe UI;
+	color: #ddd;
+	text-shadow: #262729 0 -1px 0;
+	border-top: solid 1px #666;
+	padding: 10px 0;
+}
+#example-list li strong {
+	color: #fafafa;
+}
+
+.search::-ms-clear {
+    display: none;
+}
+
+/* .demo-wrapper {
+	width: 100%;
+}
+.html5-progress-bar {
+} */

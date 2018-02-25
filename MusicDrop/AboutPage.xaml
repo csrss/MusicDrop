@@ -1,0 +1,46 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="MusicDrop.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="#303a4b">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#303a4b">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,50,0,0">
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" Style="{StaticResource PhoneTextTitle2Style}" HorizontalAlignment="Center"/>
+            <Image Source="Assets/ApplicationIconNoBackground.png" Stretch="None" Margin="0,25,0,0"></Image>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <HyperlinkButton NavigateUri="{Binding Path=LocalizedResources.IDS_Manufacturer_website, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" TargetName="_blank" Content="{Binding Path=LocalizedResources.IDS_Manufacturer_name, Source={StaticResource LocalizedStrings}}"/>
+                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.IDS_About_page_support_label_text, Source={StaticResource LocalizedStrings}}"/>
+                <HyperlinkButton NavigateUri="{Binding Path=LocalizedResources.IDS_Info_email, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" TargetName="_blank" Content="{Binding Path=LocalizedResources.IDS_Info_email_content, Source={StaticResource LocalizedStrings}}"/>
+                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.IDS_About_page_tech_label_text, Source={StaticResource LocalizedStrings}}"/>
+                <HyperlinkButton NavigateUri="{Binding Path=LocalizedResources.IDS_Tech_email, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" TargetName="_blank" Content="{Binding Path=LocalizedResources.IDS_Tech_email_content, Source={StaticResource LocalizedStrings}}"/>
+                <HyperlinkButton HorizontalAlignment="Center" TargetName="_blank" Margin="0,20,0,0" Content="{Binding Path=LocalizedResources.IDS_About_page_rate_label_text, Source={StaticResource LocalizedStrings}}" Click="HyperlinkButton_Click"></HyperlinkButton>
+                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" x:Name="UIAppVersion"></TextBlock>
+                <HyperlinkButton NavigateUri="{Binding Path=LocalizedResources.IDS_About_page_version_history_link, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" TargetName="_blank" Content="{Binding Path=LocalizedResources.IDS_About_page_version_history_link_content, Source={StaticResource LocalizedStrings}}"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</phone:PhoneApplicationPage>

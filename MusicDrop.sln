@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicDrop", "MusicDrop\MusicDrop.csproj", "{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Http", "Http\Http.vcxproj", "{DC587ACF-3C1B-4AFF-BED5-C0BD59F4CBDD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XLib", "..\XLib\XLib\XLib.vcxproj", "{163C36F9-A79A-4ACD-9540-5326CA63E6A7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XHttp", "..\XLib\XHttp\XHttp.vcxproj", "{6FFBC487-2571-4850-ADDA-85285ED5CDAA}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://dev:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Http\\Http.vcxproj
+		SccProjectName1 = Http
+		SccLocalPath1 = Http
+		SccProjectUniqueName2 = MusicDrop\\MusicDrop.csproj
+		SccProjectName2 = MusicDrop
+		SccLocalPath2 = MusicDrop
+		SccProjectUniqueName3 = ..\\XLib\\XLib\\XLib.vcxproj
+		SccProjectName3 = ../XLib/XLib
+		SccLocalPath3 = ..\\XLib\\XLib
+		SccProjectUniqueName4 = ..\\XLib\\XHttp\\XHttp.vcxproj
+		SccProjectName4 = ../XLib/XHttp
+		SccLocalPath4 = ..\\XLib\\XHttp
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Debug|ARM.ActiveCfg = Release|ARM
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Debug|ARM.Build.0 = Release|ARM
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Debug|ARM.Deploy.0 = Release|ARM
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Release|ARM.ActiveCfg = Release|ARM
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Release|ARM.Build.0 = Release|ARM
+		{FB0A0A84-23A2-4D20-88BB-E4F9D55CE088}.Release|ARM.Deploy.0 = Release|ARM
+		{DC587ACF-3C1B-4AFF-BED5-C0BD59F4CBDD}.Debug|ARM.ActiveCfg = Debug|ARM
+		{DC587ACF-3C1B-4AFF-BED5-C0BD59F4CBDD}.Debug|ARM.Build.0 = Debug|ARM
+		{DC587ACF-3C1B-4AFF-BED5-C0BD59F4CBDD}.Release|ARM.ActiveCfg = Release|ARM
+		{DC587ACF-3C1B-4AFF-BED5-C0BD59F4CBDD}.Release|ARM.Build.0 = Release|ARM
+		{163C36F9-A79A-4ACD-9540-5326CA63E6A7}.Debug|ARM.ActiveCfg = Debug|ARM
+		{163C36F9-A79A-4ACD-9540-5326CA63E6A7}.Debug|ARM.Build.0 = Debug|ARM
+		{163C36F9-A79A-4ACD-9540-5326CA63E6A7}.Release|ARM.ActiveCfg = Release|ARM
+		{163C36F9-A79A-4ACD-9540-5326CA63E6A7}.Release|ARM.Build.0 = Release|ARM
+		{6FFBC487-2571-4850-ADDA-85285ED5CDAA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6FFBC487-2571-4850-ADDA-85285ED5CDAA}.Debug|ARM.Build.0 = Debug|ARM
+		{6FFBC487-2571-4850-ADDA-85285ED5CDAA}.Release|ARM.ActiveCfg = Release|ARM
+		{6FFBC487-2571-4850-ADDA-85285ED5CDAA}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

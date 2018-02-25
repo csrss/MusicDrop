@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="jquery.js"></script>
+	<script src="jQueryKnob.js"></script>
+	<script src="jQueryList.js"></script>
+<script>
+
+
+function PreloadeImage(image_file) 
+{
+	heavyImage = new Image(); 
+	heavyImage.src = image_file;
+}
+
+function XMLHttpPlaySongRequest(song_name, song_artist, song_album) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'play', true);
+	xhr.setRequestHeader('X-FILENAME', _to_utf8(song_name));
+	xhr.setRequestHeader('X-FILEARTIST', _to_utf8(song_artist));
+	xhr.setRequestHeader('X-FILEALBUM', _to_utf8(song_album));
+	xhr.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+		}
+	}
+	xhr.onerror = function () {
+		alert('Failed to play song!');
+	}
+	xhr.send(null);
+}
+
+function XMLHttpUploader(place, targetPHP) {
+	upload = function (currentPosition, currentBlob, currentArray, totalSize, totalPosition) {
+		try {
+			if (null == currentBlob) {
+				// 2 cases: 1. Everything has been uploaded. 2. Next file has been uploaded
+				if (currentArray.length == 0) {
+					// We have uploaded everything.
+					$('#upload_progress').val(0).trigger('change');
+					
+					// Notify user that file has been successfully uploaded to a phone
+					document.getElementById("drop").style.backgroundImage = "url('UploadedIcon.png')";
+					
+					// Reload page to properly populate list of audio tracks.
+					setTimeout("location.reload(true);", 2000);
+				}
+				else {
+					// Next file was uploaded - we are taking next file.
+					currentBlob = currentArray.shift();
+				}
+			}
+
+			// If there is any blob to send.
+			if (currentBlob) {
+
+				// How many bytes are still to send. If current position is zero, means we just have started sending new file
+				var bytesLeft = currentBlob.size - currentPosition;
+
+				// Default chunk size is 1MB
+				var chunkSize = 1024 * 1024;
+
+				// Calculate current chunk size
+				var chunkCurrentSize = bytesLeft > chunkSize ? chunkSize : bytesLeft;
+
+				// We have another blob to upload
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', targetPHP, true);
+
+				xhr.setRequestHeader('X-FILENAME', _to_utf8(currentBlob.name));
+				xhr.setRequestHeader('X-FILESIZE', currentBlob.size);
+				xhr.setRequestHeader('X-FILECHUNKSIZE', chunkCurrentSize);
+				xhr.setRequestHeader('X-FILEPOSITION', currentPosition);
+
+				xhr.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+
+						// Update current position.
+						currentPosition += chunkCurrentSize;
+
+						// Update total position. Needed for showing correct progress.
+						totalPosition += chunkCurrentSize;
+
+						// Update progress
+						$('#upload_progress').val(Math.round((totalPosition * 100) / totalSize)).trigger('change');
+
+						if (currentPosition == currentBlob.size) {
+							// Current audio track has been successfully uploaded to the phone.
+							try {
+								var audioMetaData = xhr.responseText.split(':');
+								var audioName = audioMetaData[0];
+								var audioArtist = audioMetaData[1];
+								var audioAlbum = audioMetaData[2];
+								var audioItem = '<table><tr><td width="10%"><button id="btn" class="sort btn" style="width:48px;height:48px;background-image:url(\'appbar.transport.play.rest.png\')" onClick="new XMLHttpPlaySongRequest(\'' + audioName.replace(/'/g, "\\'") + '\', \'' + audioArtist.replace(/'/g, "\\'") + '\', \'' + audioAlbum.replace(/'/g, "\\'") + '\');"></button></td><td><span class="feature">' + audioName + '</span><br><small class="description">' + audioArtist + '</small><br><small class="information">' + audioAlbum + '</small></td></tr></table>';
+								
+								var newFile = document.createElement('li');
+								newFile.innerHTML = audioItem;
+								document.getElementById('list').appendChild(newFile);
+							}
+							catch (err) {
+							}
+							
+							// Upload next audio track from current collection.
+							upload(0, null, currentArray, totalSize, totalPosition);
+						}
+						else {
+							// Processing next chunk of current audio track
+							upload(currentPosition, currentBlob, currentArray, totalSize, totalPosition);
+						}
+					}
+				}
+
+				xhr.onerror = function () {
+					// Reset progress value
+					$('#upload_progress').val(0).trigger('change');
+						
+					// Set default image
+					document.getElementById("drop").style.backgroundImage = "url('UploadIcon.png')";
+					
+					// Alert user
+					alert('File transfer failed!');
+				}
+
+				xhr.send(currentBlob.slice(currentPosition, currentPosition + chunkCurrentSize));
+			}
+		}
+		catch(err){
+			// Exception. Reset everything.
+			alert(err.message);
+			
+			// Set default image
+			document.getElementById("drop").style.backgroundImage = "url('UploadIcon.png')";
+			
+			// Alert user
+			alert('File transfer failed!');
+		}
+	}
+
+	IsFormatSupported = function (filename) {
+		var ext = /^.+\.([^.]+)$/.exec(filename);
+		if (ext != null) {
+			return (ext[1] == 'mp3' || ext[1] == 'wma' || ext[1] == 'm4a');
+		}
+		return ext == null ? "" : ext[1];
+	}
+
+	_to_utf8 = function(s) {
+		var c, d = "";
+		for (var i = 0; i < s.length; i++) {
+			c = s.charCodeAt(i);
+			if (c <= 0x7f) {
+				d += s.charAt(i);
+			} else if (c >= 0x80 && c <= 0x7ff) {
+				d += String.fromCharCode(((c >> 6) & 0x1f) | 0xc0);
+				d += String.fromCharCode((c & 0x3f) | 0x80);
+			} else {
+				d += String.fromCharCode((c >> 12) | 0xe0);
+				d += String.fromCharCode(((c >> 6) & 0x3f) | 0x80);
+				d += String.fromCharCode((c & 0x3f) | 0x80);
+			}
+		}
+		return d;
+	}
+
+	// Function drop file
+	this.drop = function (event) {
+		event.preventDefault();
+		var currentArray = new Array();
+		var totalSize = 0;
+		for (var i = 0; i < event.dataTransfer.files.length; i++) {
+			if (IsFormatSupported(event.dataTransfer.files[i].name)) {
+				currentArray.push(event.dataTransfer.files[i]);
+				totalSize += event.dataTransfer.files[i].size;
+			}
+			else {
+				alert('Invalid file type detected. File: ' + event.dataTransfer.files[i].name);
+			}
+		}
+		if (currentArray.length > 0) {
+			document.getElementById("drop").style.backgroundImage = "url('UploadingIcon.png')";
+			upload(0, null, currentArray, totalSize, 0);
+		}
+	}
+
+	// The inclusion of the event listeners (DragOver and drop)
+	this.uploadPlace = document.getElementById(place);
+	this.uploadPlace.addEventListener("dragover", function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+	}, true);
+	this.uploadPlace.addEventListener("drop", this.drop, false);
+}
+</script>
+</head>
+ 
+<body onload="new List('example-list', options); new XMLHttpUploader('drop', 'upload'); new PreloadeImage('UploadingIcon.png'); new PreloadeImage('UploadIcon.png'); new PreloadeImage('UploadedIcon.png');" style="background-color:#303a4b">
+<div id="example-list">
+
+<table style = "width: 100%;">
+	<tr>
+		<td style="width:30%; vertical-align:top">
+			<!-- Here we have 1 and 2 tables -->
+			<table>
+				<tr><td><div id="drop" style="height:256px; width:256px; border: solid 1px rgba(255, 255, 255, 0.0); background-image:url('UploadIcon.png'); background-repeat:no-repeat; background-position:center; background-size:256px">
+                    <input class="knob" data-width="100%" data-angleOffset="180" data-displayInput=false data-fgColor="#fff" data-skin="tron" data-thickness=".1" id="upload_progress" readonly>
+				        </div></td></tr>
+                <!-- <tr><td><div class='notification' style='display:none; text-align:center; font-size:large; color:white'></div></td></tr> -->
+			</table>
+		</td>
+        <td style="width:70%; vertical-align:top">
+            <table>
+                <tr><td><input class="search" id = "Text1" placeholder="Search..." style="width:70%"/><span class="sort btn" data-sort="feature" style="width:20%">Sort</span></td></tr>
+				<tr><td style = "vertical-align:top;">
+					<ul class="list" id = "list">
+                        [audio_collection]
+
+				</ul>
+				</td></tr>
+			</table>
+        </td>
+	</tr>
+</table>
+</div>
+<br>
+<center><a href = "http://www.codeceptive.com" style = "color: rgba(255, 255, 255, 0.5);" target="_blank">Codeceptive Studios</a></center><br>
+</body>
+</html>
