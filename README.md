@@ -1,4 +1,8 @@
 # MusicDrop
+Mobile application for transfering music from Windows based PC to a Windows Phone device. Application support has been discontiued due to the fall of Windows Phone market share.
+
+Liks to published articles about this application:
+
 https://www.windowscentral.com/music-drop-transferring-tunes-your-windows-phone
 
 https://msmobile.pl/tag/music-drop-windows-phone
